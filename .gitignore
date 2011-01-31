@@ -1,0 +1,8 @@
+#*#
+.*~
+*~
+.#*
+.DS_Store
+%*.php
+examples/example 1/resources/compiled/
+examples/example 2/resources/compiled/

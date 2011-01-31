@@ -1,0 +1,10 @@
+Phraw is written and maintained by Davide Muzzarelli and various contributors:
+
+Maintainer
+``````````
+
+- Davide Muzzarelli <davide@davideweb.com>
+
+Patches and Suggestions
+```````````````````````
+

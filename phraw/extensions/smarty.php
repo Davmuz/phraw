@@ -6,7 +6,7 @@
  * @license BSD, see LICENSE.txt for more details.
  */
  
-require_once('Smarty.class.php');
+require_once('smarty/Smarty.class.php');
 
 /**
  * Smarty, the default template engine for Phraw.

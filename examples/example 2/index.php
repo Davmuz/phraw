@@ -28,6 +28,6 @@ if ($static_page) {
     require_once('./resources/module_example/views.php');
     view_example($phraw, $smarty);
 } else {
-    $starter->display_error_404();
+    $smarty->display_error_404();
 }
 ?>

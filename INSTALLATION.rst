@@ -13,7 +13,7 @@ Quick installation
 1. Create your project directory (e.g. "mysite.com") and enter in it.
 2. Create the "lib" directory and copy all your libraries, like Phraw and Smarty, in it.
 3. Chose an example from the "examples" directory and use it as a template, remember to copy also the hidden file ".htaccess".
-4. Set the directories "resources/compliled" and "resources/cached" as writables by PHP.
+4. Set the directories "resources/compliled" and "resources/cached" writable by PHP.
 
 Step-to-step installation
 -------------------------

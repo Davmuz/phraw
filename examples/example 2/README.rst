@@ -1,4 +1,4 @@
-Informations about the example 1
+Informations about the example 2
 ================================
 
 This example is the standard way for a quick web site with some static pages.

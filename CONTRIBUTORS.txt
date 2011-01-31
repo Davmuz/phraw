@@ -1,4 +1,4 @@
-Phraw is written and maintained by Davide Muzzarelli and various contributors:
+Phraw is written and maintained by Davide Muzzarelli:
 
 Maintainer
 ``````````

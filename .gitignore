@@ -4,7 +4,7 @@
 .#*
 .DS_Store
 %*.php
-examples/example 1/resources/cached/
-examples/example 2/resources/cached/
-examples/example 1/resources/compiled/
-examples/example 2/resources/compiled/
+examples/example 1/resources/cached/*.php
+examples/example 2/resources/cached/*.php
+examples/example 1/resources/compiled/*.php
+examples/example 2/resources/compiled/*.php

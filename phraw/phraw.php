@@ -79,7 +79,7 @@ class Phraw {
      *
      * @param string $url URL to redirect.
      * @param bool $content An optional HTML page.
-     * @return int $type Type of redirection.
+     * @param int $type Type of redirection.
      */
     function redirect($url, $type=301) {
         switch ($type) {

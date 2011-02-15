@@ -72,6 +72,28 @@ class Phraw {
         }
         return preg_match($url, $this->url, $this->request);
     }
+    
+    /**
+     * HTTP redirection.
+     * It is possibile to diplay content in the redirect page.
+     *
+     * @param string $url URL to redirect.
+     * @param bool $content An optional HTML page.
+     * @return int $type Type of redirection.
+     */
+    function redirect($url, $type=301) {
+        switch ($type) {
+            case 301:
+                # Permanent redirect
+                header('HTTP/1.1 301 Moved Permanently');
+                break;
+            case 302:
+                # Temporary redirect
+                header('HTTP/1.1 302 Found');
+                break;
+        }
+        header('Location: ' . $url);
+    }
 }
 
 /**

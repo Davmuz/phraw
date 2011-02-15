@@ -94,6 +94,15 @@ class Phraw {
         }
         header('Location: ' . $url);
     }
+    
+    /**
+     * Detect the absence of the trailing slash.
+     *
+     * @return bool True if not present or False if present.
+     */
+    function detect_no_trailing_slash() {
+        return substr($this->url, -1) != '/';
+    }
 }
 
 /**

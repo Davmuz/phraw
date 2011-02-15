@@ -101,8 +101,30 @@ class Phraw {
      * @return bool True if not present or False if present.
      */
     function detect_no_trailing_slash() {
-        return substr($this->url, -1) != '/';
+        if ($this->url) {
+            return substr($this->url, -1) != '/';
+        } else {
+            return false;
+        }
     }
+    
+    /**
+     * Fix the URL adding the trailing slash.
+     * Do a permanent redirect to the correct URL.
+     */
+    function fix_trailing_slash() {
+        $url = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $url .= $_SERVER['SERVER_NAME'] . '/';
+        if (strpos($_SERVER['REQUEST_URI'], '?') == false) {
+            # There are not GET variables, this is the simple case
+            $url .= ltrim($this->url . '/', '/');
+        } else {
+            # There are GET variables, add the trailing slash before the first "?"
+            $url .= ltrim(substr_replace($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '?'), 0), '/');
+        }
+        $this->redirect($url);
+    }
+
 }
 
 /**

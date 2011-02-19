@@ -109,12 +109,22 @@ class Phraw {
     }
     
     /**
+     * Return the current domain and the protocol used.
+     *
+     * @return string Protocol and domain name. Eg. http://www.mysite.com
+     */
+    function get_current_domain() {
+        $url = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $url .= $_SERVER['SERVER_NAME'];
+        return $url;
+    }
+    
+    /**
      * Fix the URL adding the trailing slash.
      * Do a permanent redirect to the correct URL.
      */
     function fix_trailing_slash() {
-        $url = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-        $url .= $_SERVER['SERVER_NAME'] . '/';
+        $url = $this->get_current_domain() . '/';
         if (strpos($_SERVER['REQUEST_URI'], '?') == false) {
             # There are not GET variables, this is the simple case
             $url .= ltrim($this->url . '/', '/');
@@ -124,7 +134,6 @@ class Phraw {
         }
         $this->redirect($url);
     }
-
 }
 
 /**

@@ -22,6 +22,11 @@ if (DEBUG) {
     ini_set('display_errors','Off');
 }
 
+# Resources directory path
+if (!defined('RESOURCES_DIR')) {
+    define('RESOURCES_DIR', 'resources');
+}
+
 /**
  * Phraw
  *

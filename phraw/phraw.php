@@ -53,9 +53,13 @@ class Phraw {
     /**
      * Constructor. Get the requested url.
      * @param string $url_key The name of the GET variable key that contain the url.
+     * @param string $include_path Add the directory path in the include paths.
      */
-    function __construct($url_key='u') {
+    function __construct($url_key='u', $include_path=NULL) {
         $this->url = (isset($_GET[$url_key])) ? $_GET[$url_key] : ''; // Get the query string
+        if ($include_path) {
+            set_include_path($include_path . PATH_SEPARATOR . get_include_path());
+        }
     }
     
     /**

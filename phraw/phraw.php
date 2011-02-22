@@ -53,7 +53,7 @@ class Phraw {
       * Version.
       * @ver string
       */
-    public $version = '0.2';
+    public $version = '0.3';
     
     /**
      * Constructor. Get the requested url.

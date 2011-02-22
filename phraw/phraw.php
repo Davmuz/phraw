@@ -6,7 +6,7 @@
  * 
  * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <davide@davideweb.com>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
- * @version 0.2
+ * @version 0.3
  * @package Phraw
  */
 

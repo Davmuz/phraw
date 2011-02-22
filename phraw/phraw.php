@@ -183,7 +183,7 @@ class Phraw {
      *
      * @param int $type Type of client error.
      */
-    static function client_error($type=400) {
+    static function client_error($type=404) {
         $codes = array(
             400 => 'Bad Request',
             401 => 'Unauthorized',

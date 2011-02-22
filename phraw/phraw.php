@@ -222,7 +222,7 @@ class Phraw {
      *
      * @param int $type Type of success message.
      */
-    static function success_header($type=400) {
+    static function success_header($type=200) {
         $codes = array(
             200 => 'OK',
             201 => 'Created',

@@ -32,7 +32,9 @@ class SmartyTemplateEngine extends Smarty {
     }
     
     /**
-     * Display a 404 error (page not found).
+     * Display a client error page.
+     * 
+     * @param int $type Type of message. Default: 404 Page Not Found.
      */
     function display_error($type=404) {
         Phraw::client_error($type);

@@ -158,10 +158,42 @@ class Phraw {
     }
     
     /**
-     * Prepare to display a 404 error (page not found).
+     * Set a HTTP client error 4xx header.
+     *
+     * @param int $type Type of client error.
      */
-    static function prepare_error_404() {
-        header('HTTP/1.x 404 Not Found');
+    static function client_error($type=400) {
+        $codes = array(
+            400 => 'Bad Request',
+            401 => 'Unauthorized',
+            402 => 'Payment Required',
+            403 => 'Forbidden',
+            404 => 'Not Found',
+            405 => 'Method Not Allowed',
+            406 => 'Not Acceptable',
+            407 => 'Proxy Authentication Required',
+            400 => 'Request Timeout',
+            409 => 'Conflict',
+            410 => 'Gone',
+            411 => 'Length Required',
+            412 => 'Precondition Failed',
+            413 => 'Request Entity Too Large',
+            414 => 'Request-URI Too Long',
+            415 => 'Unsupported Media Type',
+            416 => 'Requested Range Not Satisfiable',
+            417 => 'Expectation Failed',
+            418 => 'I\'m a teapot', # April Fools' jokes
+            422 => 'Unprocessable Entity', # WEBDAV
+            423 => 'Locked', # WEBDAV
+            424 => 'Failed Dependency', # WEBDAV
+            425 => 'Unordered Collection', # See RFC 3648
+            426 => 'Upgrade Required', # See RFC 2817
+            444 => 'No Response', # Nginx extension
+            449 => 'Retry With', # Microsoft extension
+            450 => 'Blocked by Windows Parental Controls', # Microsoft extension
+            499 => 'Client Closed Request', # Nginx extension
+        );
+        header('HTTP/1.1 ' . $type . ' ' . $codes[$type]);
     }
 }
 

@@ -1,26 +1,38 @@
 <?php
 # Global variables: place here your global settings
 define('DEBUG', false); # Debug mode
-define('RESOURCES_DIR', 'resources'); # Resources directory path
-define('DEFAULT_FROM_EMAIL', 'info@your-email-address.com'); # Your official email address
+#define('RESOURCES_DIR', 'resources'); # Default resources directory path, you can ovverride this uncommenting it
 
-# Load Phraw with the starter shortcut
-require_once('./lib/phraw/phraw.php');
-$starter = new DefaultStarter();
+# Load Phraw
+require_once('lib/phraw/phraw.php');
+$phraw = new Phraw();
+$phraw->add_include_path('lib'); # Add the "lib" directory to the include path
 
-# Declare a set of pages
+# Load Smarty through the Phraw extension
+require_once('phraw/extensions/smarty.php');
+$smarty = new SmartyTemplateEngine();
+
+# Prepare a bulk of static pages.
 $static_pages = array(
-    '' => 'flatpages/home.html',
+    'wellcome' => 'flatpages/wellcome.html',
     'contacts' => 'flatpages/contacts.html'
 );
 
 # Routing
-if (!$starter->static_route($static_pages)) { # Display a static page or a 404 error
-    if ($starter->phraw->route('show\/(?P<url_parameter>\d+)')) {
-        require_once('./resources/module_example/views.php');
-        view_example($starter->phraw, $starter->template_engine);
-    } else {
-        $starter->display_error_404();
-    }
+if ($phraw->route('')) { # Home page
+    $smarty->display('flatpages/home.html');
+
+} else if ($phraw->detect_no_trailing_slash()) { # Detect and fix the trailing slash for the following routed pages
+    $phraw->fix_trailing_slash();
+    
+} else if ($phraw->bulk_route($static_pages, $page_found)) { # Fill $page_found if a $static_pages page if found
+    $smarty->display($page_found);
+    
+} else if ($phraw->route('show\/(?P<url_parameter>\d+)')) { # Get "url_parameter" from the URL and load a custom view function
+    require_once('./resources/module_example/views.php');
+    view_example($phraw, $smarty);
+    
+} else {
+    $smarty->display_error();
 }
 ?>

@@ -5,6 +5,4 @@
 .DS_Store
 %*.php
 examples/example 1/resources/cached/*.php
-examples/example 2/resources/cached/*.php
 examples/example 1/resources/compiled/*.php
-examples/example 2/resources/compiled/*.php

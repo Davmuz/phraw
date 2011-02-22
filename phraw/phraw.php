@@ -60,10 +60,21 @@ class Phraw {
      * @param string $url_key The name of the GET variable key that contain the url.
      * @param string $include_path Add the directory path in the include paths.
      */
-    function __construct($url_key='u', $include_path=NULL) {
+    function __construct($url_key='u') {
         $this->url = (isset($_GET[$url_key])) ? $_GET[$url_key] : ''; // Get the query string
-        if ($include_path) {
+    }
+    
+    /**
+     * Add the path to the include path.
+     *
+     * @param string Path to add to the include path.
+     * @param bool If true append it to the end. Default: false.
+     */
+    static function add_include_path($include_path, $append=false) {
+        if ($append) {
             set_include_path($include_path . PATH_SEPARATOR . get_include_path());
+        } else {
+            set_include_path(get_include_path() . PATH_SEPARATOR . $include_path);
         }
     }
     
@@ -143,6 +154,13 @@ class Phraw {
         }
         $this->redirect($url);
     }
+    
+    /**
+     * Prepare to display a 404 error (page not found).
+     */
+    static function prepare_error_404() {
+        header('HTTP/1.x 404 Not Found');
+    }
 }
 
 /**
@@ -198,7 +216,7 @@ class DefaultStarter {
     /**
      * Display a 404 error (page not found).
      */
-    function display_error_404() {
+    function prepare_error_404() {
         $this->template_engine->display_error_404();
     }
 }

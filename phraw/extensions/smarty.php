@@ -34,9 +34,9 @@ class SmartyTemplateEngine extends Smarty {
     /**
      * Display a 404 error (page not found).
      */
-    function display_error_404() {
-        Phraw::prepare_error_404();
-        $this->display('404.html');
+    function display_error($type=404) {
+        Phraw::client_error($type);
+        $this->display($type . '.html');
     }
 }
 ?>

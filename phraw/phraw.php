@@ -94,6 +94,27 @@ class Phraw {
     }
     
     /**
+     * Url matching for an array of pages.
+     *
+     * @param array $urls Key = regex path, Value = page path.
+     * @param variable $assign Place the value of the array in the given variable
+     * @return mixin|bool The value matched or true if $assign is used. False if not matched.
+     */
+    function bulk_route(&$urls, &$assign=false, $simple=true) {
+        foreach ($urls as $url => $value) {
+            if ($this->route($url, $simple)) {
+                if ($assign === false) {
+                    return $value;
+                } else {
+                    $assign = $value;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    /**
      * HTTP redirection.
      * It is possibile to diplay content in the redirect page.
      *
@@ -272,21 +293,5 @@ class DefaultStarter {
     function prepare_error_404() {
         $this->template_engine->display_error_404();
     }
-}
-
-/**
- * Url matching for an array of static pages.
- *
- * @param Phraw $phraw A Phraw insance.
- * @param array $urls Key = regex path, Value = page path.
- * @return string|bool The page path or false if not matched.
- */
-function static_route(&$urls, $phraw) {
-    foreach ($urls as $url => $page) {
-        if ($phraw->route($url)) {
-            return $page;
-        }
-    }
-    return false;
 }
 ?>

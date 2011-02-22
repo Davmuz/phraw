@@ -51,7 +51,7 @@ Set the constant "DEBUG" to true in order to see the errors.
 
 These are the common errors:
 
-- Have you copied the .htacces file in the project directory?
+- Have you copied the .htaccess file in the project directory?
 - Your web server (like Apache) does support mod_rewrite? Is it active?
 - The Smarty's compiled files are stored in the "resources/compliled" directory, is it writable?
 - The Smarty's caching files are stored in the "resources/cached" directory, is it writable?

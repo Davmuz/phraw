@@ -68,7 +68,7 @@ class Phraw {
      * Add the path to the include path.
      *
      * @param string Path to add to the include path.
-     * @param bool If true append it to the end. Default: false.
+     * @param bool If true append it to the end.
      */
     static function add_include_path($include_path, $append=false) {
         if ($append) {
@@ -97,22 +97,24 @@ class Phraw {
      * HTTP redirection.
      * It is possibile to diplay content in the redirect page.
      *
-     * @param string $url URL to redirect.
-     * @param bool $content An optional HTML page.
+     * @param string $url URL to redirect. Use null for not add the "Location" header.
      * @param int $type Type of redirection.
      */
-    function redirect($url, $type=301) {
-        switch ($type) {
-            case 301:
-                # Permanent redirect
-                header('HTTP/1.1 301 Moved Permanently');
-                break;
-            case 302:
-                # Temporary redirect
-                header('HTTP/1.1 302 Found');
-                break;
+    function redirect($url=null, $type=301) {
+        $codes = array(
+            300 => 'Multiple Choices',
+            301 => 'Moved Permanently',
+            302 => 'Found',
+            303 => 'See Other',
+            304 => 'Not Modified',
+            305 => 'Use Proxy',
+            306 => 'Switch Proxy',
+            307 => 'Temporary Redirect'
+        );
+        header('HTTP/1.1 ' . $type . ' ' . $codes[$type]);
+        if ($url) {
+            header('Location: ' . $url);
         }
-        header('Location: ' . $url);
     }
     
     /**

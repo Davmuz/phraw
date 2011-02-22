@@ -191,7 +191,26 @@ class Phraw {
             444 => 'No Response', # Nginx extension
             449 => 'Retry With', # Microsoft extension
             450 => 'Blocked by Windows Parental Controls', # Microsoft extension
-            499 => 'Client Closed Request', # Nginx extension
+            499 => 'Client Closed Request' # Nginx extension
+        );
+        header('HTTP/1.1 ' . $type . ' ' . $codes[$type]);
+    }
+
+    /**
+     * Set a HTTP success 2xx header.
+     *
+     * @param int $type Type of success message.
+     */
+    static function success_header($type=400) {
+        $codes = array(
+            200 => 'OK',
+            201 => 'Created',
+            202 => 'Accepted',
+            203 => 'Non-Authoritative Information',
+            204 => 'No Content',
+            205 => 'Reset Content',
+            206 => 'Partial Content',
+            207 => 'Multi-Status' # WEBDAV
         );
         header('HTTP/1.1 ' . $type . ' ' . $codes[$type]);
     }

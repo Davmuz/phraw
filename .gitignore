@@ -6,3 +6,4 @@
 %*.php
 examples/example 1/resources/cached/*.php
 examples/example 1/resources/compiled/*.php
+examples/example 1/lib/

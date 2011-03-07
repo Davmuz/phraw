@@ -1,7 +1,9 @@
 <?php
 /**
  * Smarty extension.
- * 
+ *
+ * The Smarty template engine can be found here: http://www.smarty.net/
+ *
  * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  */

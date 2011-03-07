@@ -3,7 +3,7 @@ Phraw is written and maintained by Davide Muzzarelli:
 Maintainer
 ``````````
 
-- Davide Muzzarelli <davide@davideweb.com>
+- Davide Muzzarelli <d.muzzarelli@dav-muz.net>
 
 Patches and Suggestions
 ```````````````````````

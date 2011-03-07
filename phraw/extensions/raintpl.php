@@ -4,7 +4,7 @@
  *
  * The Raintpl template engine can be found here: http://www.raintpl.com/
  * 
- * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <davide@davideweb.com>. All rights reserved.
+ * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  */
  

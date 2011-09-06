@@ -20,7 +20,7 @@ class SmartyTemplateEngine extends Smarty {
      *
      * @param bool $caching Activate the template caching.
      */
-    function __construct($caching=true) {
+    function __construct($caching=1) {
         parent::__construct();
         $this->template_dir = RESOURCES_DIR . '/templates/';
         $this->compile_dir = RESOURCES_DIR . '/compiled/';
@@ -29,7 +29,7 @@ class SmartyTemplateEngine extends Smarty {
         
         if (DEBUG) {
             $this->force_compile = true;
-            $this->caching = false;
+            $this->caching = 0;
         }
     }
     

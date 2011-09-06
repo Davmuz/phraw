@@ -2,6 +2,7 @@
 /**
  * Sessions files handler extension.
  *
+ * This class is more secure than the default session handling behavior.
  * It is possible to encrypt the session files giving a crypt object.
  *
  * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
@@ -40,7 +41,8 @@ class SessionFilesHandler extends SessionSaveHandler {
     /**
      * Constructor.
      *
-     * @param string $save_path Session files directory. Example: '/home/user/tmp'.
+     * @param string $save_path Session files directory. Use the PHP default path if null. Example: '/home/user/tmp'.
+     * @param string $save_path Optional encryption object with encrypt() and decrypt() methods.
      * @param string $file_prefix Session file name prefix.
      */
     public function __construct($save_path=null, $crypt_object=null, $file_prefix='sess_') {

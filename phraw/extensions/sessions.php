@@ -68,6 +68,6 @@ class SessionSaveHandler {
      *
      * @param int $max_life_time Maximum life time of session data to remove.
      */
-    abstract public function gc($max_life_time)
+    abstract public function gc($max_life_time);
 }
 ?>

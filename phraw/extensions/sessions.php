@@ -11,7 +11,7 @@
  * Extend this class with a concrete implementation of session functions.
  * Read the official documentation for more informations: http://www.php.net/manual/en/function.session-set-save-handler.php
  */ 
-class SessionSaveHandler {
+abstract class SessionSaveHandler {
     /**
      * It is possible to extend this class and pass custom parameters.
      */

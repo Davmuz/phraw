@@ -48,6 +48,13 @@ class Phraw {
      * @var array
      */
     public $request;
+    
+    /**
+     * Session handler object.
+     *
+     * @var SessionSaveHandler
+     */
+    public $session_handler;
 
     /**
       * Version.
@@ -136,6 +143,18 @@ class Phraw {
         if ($url) {
             header('Location: ' . $url);
         }
+    }
+    
+    /**
+     * Start a session using the given SessionSaveHandler base class.
+     *
+     * @param SessionSaveHandler $class SessionSaveHandler extended class.
+     * @param mixin Variable arguments for the handler class.
+     */
+    function session_start($class /* variable arguments */) {
+        $reflection = new ReflectionClass($class);
+        $this->session_handler = $reflection->newInstanceArgs(array_slice(func_get_args(), 1));
+        session_start();
     }
     
     /**

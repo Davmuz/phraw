@@ -154,7 +154,7 @@ class Phraw {
      * @param string $url URL to redirect. Use null for not add the "Location" header.
      * @param int $type Type of redirection.
      */
-    function redirect($url=null, $type=301) {
+    static function redirect($url=null, $type=301) {
         $codes = array(
             300 => 'Multiple Choices',
             301 => 'Moved Permanently',

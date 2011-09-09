@@ -200,10 +200,8 @@ class Phraw {
      *
      * @return string Protocol and domain name. Eg. http://www.mysite.com
      */
-    function get_current_domain() {
-        $url = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-        $url .= $_SERVER['SERVER_NAME'];
-        return $url;
+    static function get_current_domain() {
+        return (!empty($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
     }
     
     /**

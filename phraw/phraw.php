@@ -191,9 +191,8 @@ class Phraw {
     function detect_no_trailing_slash() {
         if ($this->uri) {
             return substr($this->uri, -1) != '/';
-        } else {
-            return false;
         }
+        return false;
     }
     
     /**

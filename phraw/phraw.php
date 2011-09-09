@@ -107,6 +107,7 @@ class Phraw {
      * Methods:
      * - null: uses regular expressions.
      * - equal: matches equal strings.
+     * - prexp: uses regular expressions only in parentheses.
      *
      * @param string $uri URI to match.
      * @param bool $simple Method used to match the URI. Default: uses regular expressions.
@@ -121,6 +122,21 @@ class Phraw {
                 }
                 return false;
                 break;
+            case 'prexp': # Regular expressions only on parentheses
+                $chunks = preg_split('/(\()|(\))/', $uri, null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+                $regx_uri = '';
+                $inside_parentheses = false;
+                foreach ($chunks as $chunk) {
+                    if ($chunk == '(') {
+                        $inside_parentheses = true;
+                    } else if ($chunk == ')') {
+                        $inside_parentheses = false;
+                    } else if (!$inside_parentheses) {
+                        $chunk = preg_quote($chunk, '/');
+                    }
+                    $regx_uri .= $chunk;
+                }
+                $uri = $regx_uri;
             default: # Regular expression
                 return preg_match('/^\/' . $uri . '$/', $this->uri, $this->request);
         }

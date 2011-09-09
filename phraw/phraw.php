@@ -36,11 +36,11 @@ if (!defined('RESOURCES_DIR')) {
  */ 
 class Phraw {
     /**
-     * Contains the requested url.
+     * Contains the requested URI.
      *
      * @var string
      */
-    public $url;
+    public $uri;
     
     /**
      * Contains the regex values matched from the url.
@@ -58,17 +58,23 @@ class Phraw {
 
     /**
       * Version.
+      *
       * @ver string
       */
     public $version = '0.3';
     
     /**
-     * Constructor. Get the requested url.
-     * @param string $url_key The name of the GET variable key that contain the url.
-     * @param string $include_path Add the directory path in the include paths.
+     * Constructor. Get the requested URI.
+     *
+     * @param string $uri_key Optional: the name of the GET variable key that contain the URI.
      */
-    function __construct($url_key='u') {
-        $this->url = (isset($_GET[$url_key])) ? $_GET[$url_key] : ''; // Get the query string
+    function __construct($uri_key=null) {
+        // Get the URI
+        if ($uri_key) {
+            $this->uri = (isset($_GET[$uri_key])) ? '/' . $_GET[$uri_key] : '/';
+        } else {
+            $this->uri = $this->get_uri();
+        }
     }
     
     /**
@@ -84,32 +90,52 @@ class Phraw {
             set_include_path(get_include_path() . PATH_SEPARATOR . $include_path);
         }
     }
-    
+
     /**
-     * Url matching for regex.
-     * The matching values are stored in $this->request.
+     * Get the URI of the current request.
      *
-     * @param string $url Regex of the url to match.
-     * @param bool $simple If true it add the standard head and tail to the regex string.
-     * @return bool True if the url is matched.
+     * @return string URI string.
      */
-    function route($url, $simple=true) {
-        if($simple) {
-            $url = '/^\/?' . $url . '\/?$/';
-        }
-        return preg_match($url, $this->url, $this->request);
+    static function get_uri() {
+        return isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'];
     }
     
     /**
-     * Url matching for an array of pages.
+     * URI matching for regex.
+     * The matching values are stored in $this->request.
      *
-     * @param array $urls Key = regex path, Value = page path.
-     * @param variable $assign Place the value of the array in the given variable
-     * @return mixin|bool The value matched or true if $assign is used. False if not matched.
+     * Methods:
+     * - null: uses regular expressions.
+     * - equal: matches equal strings.
+     *
+     * @param string $uri URI to match.
+     * @param bool $simple Method used to match the URI. Default: uses regular expressions.
+     * @return bool True if the url is matched.
      */
-    function bulk_route(&$urls, &$assign=false, $simple=true) {
-        foreach ($urls as $url => $value) {
-            if ($this->route($url, $simple)) {
+    function route($uri, $method=null) {
+        switch ($method) {
+            case 'equal': # Simple equal strings match
+                if ('/' . $uri == $this->uri) {
+                    $this->request = array($this->uri);
+                    return true;
+                }
+                return false;
+                break;
+            default: # Regular expression
+                return preg_match('/^\/' . $uri . '$/', $this->uri, $this->request);
+        }
+    }
+    
+    /**
+     * URI matching for an array of pages.
+     *
+     * @param array $uris Key = regex path, Value = page path.
+     * @param variable $assign Place the value of the array in the given variable
+     * @return string Method used to match the URI.
+     */
+    function bulk_route(&$uri_list, &$assign=false, $method=null) {
+        foreach ($uri_list as $uri => $value) {
+            if ($this->route($uri, $method)) {
                 if ($assign === false) {
                     return $value;
                 } else {
@@ -123,7 +149,7 @@ class Phraw {
     
     /**
      * HTTP redirection.
-     * It is possibile to diplay content in the redirect page.
+     * It is possibile to display content in the redirect page.
      *
      * @param string $url URL to redirect. Use null for not add the "Location" header.
      * @param int $type Type of redirection.
@@ -163,8 +189,8 @@ class Phraw {
      * @return bool True if not present or False if present.
      */
     function detect_no_trailing_slash() {
-        if ($this->url) {
-            return substr($this->url, -1) != '/';
+        if ($this->uri) {
+            return substr($this->uri, -1) != '/';
         } else {
             return false;
         }
@@ -182,14 +208,14 @@ class Phraw {
     }
     
     /**
-     * Fix the URL adding the trailing slash.
+     * Fix the URI adding the trailing slash.
      * Do a permanent redirect to the correct URL.
      */
     function fix_trailing_slash() {
         $url = $this->get_current_domain() . '/';
         if (strpos($_SERVER['REQUEST_URI'], '?') == false) {
             # There are not GET variables, this is the simple case
-            $url .= ltrim($this->url . '/', '/');
+            $url .= ltrim($this->uri . '/', '/');
         } else {
             # There are GET variables, add the trailing slash before the first "?"
             $url .= ltrim(substr_replace($_SERVER['REQUEST_URI'], '/', strpos($_SERVER['REQUEST_URI'], '?'), 0), '/');

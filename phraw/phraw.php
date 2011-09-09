@@ -189,10 +189,7 @@ class Phraw {
      * @return bool True if not present or False if present.
      */
     function detect_no_trailing_slash() {
-        if ($this->uri) {
-            return substr($this->uri, -1) != '/';
-        }
-        return false;
+        return $this->uri ? substr($this->uri, -1) != '/' : false;
     }
     
     /**

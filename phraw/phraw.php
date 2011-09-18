@@ -116,7 +116,7 @@ class Phraw {
     function route($uri, $method=null) {
         switch ($method) {
             case 'equal': # Simple equal strings match
-                if ('/' . $uri == $this->uri) {
+                if (($uri === '/' && $uri === $this->uri) ||  '/' . $uri === $this->uri) {
                     $this->request = array($this->uri);
                     return true;
                 }

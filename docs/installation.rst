@@ -11,14 +11,43 @@ The faster way to install Phraw is to `download <http://phraw.dav-muz.net/downlo
 
 Follow the instructions:
 
-# Download the pre-packaged distribution.
-# Extract the files.
-# Copy all the files in the web directory on the web server. Pay attention to copy also the hidden .htaccess files.
-# Set the permissions as 777 o the directories: ``resources/cached/`` and ``resources/compiled/``.
+#. Download the pre-packaged distribution.
+#. Extract the files.
+#. Copy all the files in the web directory on the web server. Pay attention to copy also the hidden .htaccess files.
+#. Set the permissions as 777 o the directories: ``resources/cached/`` and ``resources/compiled/``.
 
 The debugging is set to True by default in order to help you during the installation, you can change it in the index.php file.
 
 Now visit the web site and you will see the working page.
+
+Using Apache
+^^^^^^^^^^^^
+
+The pre-packaged distribution contains an ``.htaccess`` pre-build file that uses mod_rewrite.
+
+mod_rewrite is optional but strongly suggested.
+
+Using Nginx
+^^^^^^^^^^^
+
+Edit your site configuration file and add the following lines to your "location / {...}" section::
+
+    location / {
+        # ...
+        
+        if (!-f $request_filename) {
+            rewrite ^.*$ /index.php last;
+            break;
+        }
+        if (!-d $request_filename) {
+            rewrite ^.*$ /index.php last;
+            break;
+        }
+        
+        # ...
+    }
+
+The rewrite feature is optional but strongly suggested.
 
 
 Manual installation
@@ -86,4 +115,4 @@ For a cleaner setup it is suggested to copy only the ``libs`` directory in the S
 Creation of the web site
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Phraw is now ready to use. In order to see something you should create an index.php file and create some template. Continue reading the next chapter :ref:`quickstart` for more informations.
+Phraw is now ready to use. In order to print something you should create an index.php file. Continue reading the next chapter :ref:`quickstart` for more informations.

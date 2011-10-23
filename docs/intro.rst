@@ -15,19 +15,19 @@ Phraw is more like a library where you can pick what you want and use powerful t
 The benefits of Phraw
 ---------------------
 
-Phraw is little, this means several things: less to learn, less code so less bugs, faster loading speed, better performances. These are all good benefits both in little and in big web sites.
+Phraw is little, this means several things: less to learn, less code so less bugs, better performances. These are all good benefits both in little and in big web sites.
 
 Phraw have also other benefits and features:
 
 * Flexible: you have the full control of the application.
 * Leveraging good template engines: ready to use and some with caching.
-* Rest urls: best results for SEO.
+* Rest URLs: best results for SEO.
 * Multi-pattern: you can develop the pattern that you prefer like MVC, MVP and so on.
 * Redirects: a single fast function.
 * Customizable detection and correction of the trailing slash: useful with custom behaviors.
-* Client error and success headers ready to use.
+* Client errors and success headers ready to use.
 * Bulk routing: for deal with similar pages in one shot.
 * Session handling: customizable, replaceable and extensible.
-* Multi-routing system: more than one method to math the pages.
+* Multi-routing system: chose your preferred method to match the pages.
 
 Continue to read through this documentation, you will find a lot of ideas on how to use this framework!

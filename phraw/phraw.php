@@ -43,11 +43,11 @@ class Phraw {
     public $uri;
     
     /**
-     * Contains the regex values matched from the url.
+     * Contains the URI values extracted from the url.
      *
      * @var array
      */
-    public $request;
+    public $uri_values;
     
     /**
      * Session handler object.
@@ -80,7 +80,8 @@ class Phraw {
     /**
      * Add the path to the include path.
      *
-     * @param string Path to add to the include path.
+     * @param string $include_path Path to add to the include path.
+     * @param bool $append If true append the path, if false prepend it. Default: prepend it.
      * @param bool If true append it to the end.
      */
     static function add_include_path($include_path, $append=false) {
@@ -97,32 +98,35 @@ class Phraw {
      * @return string URI string.
      */
     static function get_uri() {
-        return isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'];
+        return (string) substr(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'], 1);
     }
     
     /**
      * URI matching for regex.
-     * The matching values are stored in $this->request.
+     * The matching values are stored in $this->uri_values.
+     * The route mechanism can use a built-in function or a custom function passed by name.
      *
-     * Methods:
-     * - null: uses regular expressions.
-     * - equal: matches equal strings.
+     * Built-in methods:
+     * - rexp: uses regular expressions (default).
      * - prexp: uses regular expressions only in parentheses.
+     * - equal: matches equal strings.
+     *
+     * Using a custom function: create a new function or objcect method with the parameters &$uri and &$uri_values. See the documentation for more informations.
      *
      * @param string $uri URI to match.
-     * @param bool $simple Method used to match the URI. Default: uses regular expressions.
+     * @param mixed $function Method name (string) used to match the URI or function name (string) or method name (array) for a custom function call. Default: uses regular expressions.
      * @return bool True if the url is matched.
      */
-    function route($uri, $method=null) {
-        switch ($method) {
+    function route($uri, $function='rexp') {
+        switch ($function) {
             case 'equal': # Simple equal strings match
-                if (($uri === '/' && $uri === $this->uri) ||  '/' . $uri === $this->uri) {
-                    $this->request = array($this->uri);
+                if ($uri === $this->uri) {
+                    $this->uri_values = array($this->uri);
                     return true;
                 }
                 return false;
-                break;
             case 'prexp': # Regular expressions only on parentheses
+                # Escape
                 $chunks = preg_split('/(\()|(\))/', $uri, null, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
                 $regx_uri = '';
                 $inside_parentheses = false;
@@ -136,9 +140,21 @@ class Phraw {
                     }
                     $regx_uri .= $chunk;
                 }
-                $uri = $regx_uri;
-            default: # Regular expression
-                return preg_match('/^\/' . $uri . '$/', $this->uri, $this->request);
+                
+                # Replace rexp start and end
+                $uri_len = strlen($uri);
+                if ($uri_len && $uri[0] === '^') {
+                    $regx_uri = substr($regx_uri, 1);
+                }
+                if ($uri_len && $uri[$uri_len - 1] === '$') {
+                    $regx_uri = substr($regx_uri, 0, -2) . '$';
+                }
+                
+                return preg_match('/' . $regx_uri . '/', $this->uri, $this->uri_values);
+            case 'rexp': # Regular expression
+                return preg_match('/' . $uri . '/', $this->uri, $this->uri_values);
+            default: # Function or method call
+                return call_user_func_array($function, array(&$this->uri, &$this->uri_values));
         }
     }
     
@@ -146,12 +162,13 @@ class Phraw {
      * URI matching for an array of pages.
      *
      * @param array $uris Key = regex path, Value = page path.
-     * @param variable $assign Place the value of the array in the given variable
-     * @return string Method used to match the URI.
+     * @param string $assign Variable name. Place the value of the array item in the given variable.
+     * @param mixed $function Method used to match the URI See the $function parameter of the route() method.
+     * @return mixed Array item value or true (if assing===false) if something is matched. Returns false if nothing is matched.
      */
-    function bulk_route(&$uri_list, &$assign=false, $method=null) {
+    function bulk_route(&$uri_list, &$assign=false, $function='rexp') {
         foreach ($uri_list as $uri => $value) {
-            if ($this->route($uri, $method)) {
+            if ($this->route($uri, $function)) {
                 if ($assign === false) {
                     return $value;
                 } else {

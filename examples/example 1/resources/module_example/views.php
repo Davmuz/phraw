@@ -1,7 +1,7 @@
 <?php
 function view_example(&$phraw, &$smarty) {
     $contexts = array(
-        'url_parameter' => $phraw->request['url_parameter']
+        'url_value' => $phraw->uri_values['url_value']
     );
     
     // Publish

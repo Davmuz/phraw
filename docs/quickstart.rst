@@ -282,7 +282,7 @@ It is also possible to obtain values directly from the URL ``http://example.com/
     <?php
     # ...
     } else if ($phraw->route('^hello\/(?P<name>\.*)\/?$')) { # Say-hello page
-        $smarty->assign('name', $phraw->request['name']);
+        $smarty->assign('name', $phraw->uri_values['name']);
         $smarty->display('say-hello.html');
     # ...
     ?>

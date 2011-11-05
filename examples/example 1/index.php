@@ -28,7 +28,7 @@ if ($phraw->route('')) { # Home page
 } else if ($phraw->bulk_route($static_pages, $page_found)) { # Fill $page_found if a $static_pages page if found
     $smarty->display($page_found);
     
-} else if ($phraw->route('show\/(?P<url_parameter>\d+)')) { # Get "url_parameter" from the URL and load a custom view function
+} else if ($phraw->route('^show\/(?P<url_value>\d+)\/?$')) { # Get "url_value" from the URL and load a custom view function
     require_once('./resources/module_example/views.php');
     view_example($phraw, $smarty);
     

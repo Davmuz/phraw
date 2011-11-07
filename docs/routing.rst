@@ -417,7 +417,7 @@ A simple example:
         )
     );
     
-    if ($phraw->tree_route($static_pages, $values, 'equal')) { # Tree routing
+    if ($phraw->tree_route($tree_pages, $values, 'equal')) { # Tree routing
         $smarty->display($values[0]);
     }
     # ...
@@ -447,7 +447,7 @@ In the next example the page "documentation/" -> "other/" have not a "page" valu
         )
     );
     
-    if ($phraw->tree_route($static_pages, $values, 'equal')) { # Tree routing
+    if ($phraw->tree_route($tree_pages, $values, 'equal')) { # Tree routing
         $smarty->display($values['page']);
     }
     # ...
@@ -477,7 +477,7 @@ In the example there is a "section" custom value for the templates:
         )
     );
     
-    if ($phraw->tree_route($static_pages, $values, 'equal')) { # Tree routing
+    if ($phraw->tree_route($tree_pages, $values, 'equal')) { # Tree routing
         $smarty->assign('section' => $values['section']);
         $smarty->display($values['page']);
     }
@@ -491,7 +491,7 @@ It can be used an object attribute for the ``$assign`` parameter:
     <?php
     # ...
     
-    $static_pages = array(
+    $tree_pages = array(
         #...
     );
     
@@ -501,7 +501,7 @@ It can be used an object attribute for the ``$assign`` parameter:
     
     $a = new A;
     
-    if ($phraw->tree_route($static_pages, $a->page_found)) {
+    if ($phraw->tree_route($tree_pages, $a->page_found)) {
         $smarty->display($a->page_found);
     }
     # ...
@@ -514,13 +514,13 @@ It can be used an object attribute for the ``$assign`` parameter:
     <?php
     # ...
     
-    $static_pages = array(
+    $tree_pages = array(
         #...
     );
     
     $a = array('foo' => 'bar');
     
-    if ($phraw->tree_route($static_pages, $a['page_found'])) {
+    if ($phraw->tree_route($tree_pages, $a['page_found'])) {
         $smarty->assign('foo', $a['foo'])
         $smarty->display($a['page_found']);
     }

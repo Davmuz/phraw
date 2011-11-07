@@ -289,7 +289,7 @@ It is also possible to obtain values directly from the URL ``http://example.com/
 
 Phraw automatically extracts the patterns from the regular expression and stores it into the ``requests`` property.
 
-The regular expression looks ugly? No problem, there are other optional algorithms that you can use: see the API reference guide for more informations.
+The regular expression looks ugly? No problem, there are other optional algorithms that you can use: see the :doc:`routing guide </routing>` for more informations.
 
 Conclusions
 -----------

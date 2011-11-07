@@ -102,7 +102,7 @@ class Phraw {
     }
     
     /**
-     * URI matching for regex.
+     * URI matching.
      * The matching values are stored in $this->uri_values.
      * The route mechanism can use a built-in function or a custom function passed by name.
      *
@@ -161,18 +161,44 @@ class Phraw {
     /**
      * URI matching for an array of pages.
      *
-     * @param array $uris Key = regex path, Value = page path.
-     * @param string $assign Variable name. Place the value of the array item in the given variable.
+     * @param array $uri_list Key = regex path, Value = page path.
+     * @param string $assign Variable where store the custom values of the matched URI.
      * @param mixed $function Method used to match the URI See the $function parameter of the route() method.
-     * @return mixed Array item value or true (if assing===false) if something is matched. Returns false if nothing is matched.
+     * @return mixed Array item value or true (if assing===false) (DEPRECATED). Returns true if something is matched.
      */
-    function bulk_route(&$uri_list, &$assign=false, $function='rexp') {
+    function bulk_route(&$uri_list, &$assign, $function='rexp') {
         foreach ($uri_list as $uri => $value) {
             if ($this->route($uri, $function)) {
-                if ($assign === false) {
-                    return $value;
-                } else {
-                    $assign = $value;
+                $assign = $value;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * URI matching for an tree of pages.
+     * URI is build following the tree. The values, if in an array, are merged upside.
+     *
+     * @param array $uri_tree An array of arrays. The key is the rexp path. The value is an array where the first one contains the continue of the tree or null, the following values contains the custom values.
+     * @param string $assign Variable where store the custom values of the matched URI.
+     * @param mixed $function Method used to match the URI See the $function parameter of the route() method.
+     * @param string $_prefix Private variable for recursion. Don't use it.
+     * @return bool True if something is matched.
+     */
+    function tree_route(&$uri_tree, &$assign, $function='rexp', $_prefix='') {
+        foreach ($uri_tree as $partial_uri => $value) {
+            if ($value[0]) { # It's a branch
+                $result = $this->tree_route($value[0], $assign, $function, $partial_uri);
+                if ($result) {
+                    if (is_array($assign)) {
+                        $assign = array_merge(array_slice($value, 1), $assign);
+                    }
+                    return $result;
+                }
+            } else { # It's a leaf
+                if ($this->route($_prefix . $partial_uri, $function)) {
+                    $assign = is_array($assign) ? array_merge($assign, array_slice($value, 1)) : array_slice($value, 1);
                     return true;
                 }
             }
@@ -236,7 +262,7 @@ class Phraw {
     
     /**
      * Fix the URI adding the trailing slash.
-     * Do a permanent redirect to the correct URL.
+     * It does a permanent redirect to the correct URL.
      */
     function fix_trailing_slash() {
         $url = $this->get_current_domain() . '/';

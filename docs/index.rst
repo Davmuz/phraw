@@ -1,7 +1,7 @@
 Welcome to Phraw's documentation!
 =================================
 
-Contents:
+Phraw is a PHP mini-framework for web sites and web applications. It's open source, fast, flexible and has a very small footprint.
 
 First steps
 -----------

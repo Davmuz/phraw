@@ -81,7 +81,7 @@ class Phraw {
      * Add the path to the include path.
      *
      * @param string $include_path Path to add to the include path.
-     * @param bool $append If true append the path, if false prepend it. Default: prepend it.
+     * @param bool $append If true append the path, if false prepend it.
      * @param bool If true append it to the end.
      */
     static function add_include_path($include_path, $append=false) {
@@ -114,7 +114,7 @@ class Phraw {
      * Using a custom function: create a new function or objcect method with the parameters &$uri and &$uri_values. See the documentation for more informations.
      *
      * @param string $uri URI to match.
-     * @param mixed $function Method name (string) used to match the URI or function name (string) or method name (array) for a custom function call. Default: uses regular expressions.
+     * @param mixed $function Method name (string) used to match the URI or function name (string) or method name (array) for a custom function call.
      * @return bool True if the url is matched.
      */
     function route($uri, $function='rexp') {

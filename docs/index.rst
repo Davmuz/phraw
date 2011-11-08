@@ -22,6 +22,7 @@ Advanced
    :maxdepth: 2
 
    setup
+   shortcuts
    templates
    routing
    configuration

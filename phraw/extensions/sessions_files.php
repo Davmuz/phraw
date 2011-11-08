@@ -3,7 +3,7 @@
  * Sessions files handler extension.
  *
  * This class is more secure than the default session handling behavior.
- * It is possible to encrypt the session files giving a crypt object.
+ * It is possible to encrypt the session files giving an encrypt object.
  *
  * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
@@ -36,21 +36,21 @@ class SessionFilesHandler extends SessionSaveHandler {
      *
      * @var object
      */
-    public $crypt_object;
+    public $encrypt_object;
 
     /**
      * Constructor.
      *
      * @param string $save_path Session files directory. Use the PHP default path if null. Example: '/home/user/tmp'.
-     * @param string $save_path Optional encryption object with encrypt() and decrypt() methods.
+     * @param string $encrypt_object Optional encryption object with encrypt() and decrypt() methods.
      * @param string $file_prefix Session file name prefix.
      */
-    public function __construct($save_path=null, $crypt_object=null, $file_prefix='sess_') {
+    public function __construct($save_path=null, $encrypt_object=null, $file_prefix='sess_') {
         parent::__construct();
         if ($save_path != null) {
             $this->save_path = realpath($save_path);
         } # Else, it will be set with the open() method
-        $this->crypt_object = $crypt_object;
+        $this->encrypt_object = $encrypt_object;
     }
     
     /**
@@ -78,8 +78,8 @@ class SessionFilesHandler extends SessionSaveHandler {
      * @return string Session data. Return a void string if there is no data to read.
      */
     public function read($session_id) {
-        if ($this->crypt_object) {
-            return $this->crypt_object->decrypt((string) @file_get_contents($this->_build_file_path($session_id)));
+        if ($this->encrypt_object) {
+            return $this->encrypt_object->decrypt((string) @file_get_contents($this->_build_file_path($session_id)));
         } else {
                 return (string) @file_get_contents($this->_build_file_path($session_id));
             }
@@ -93,8 +93,8 @@ class SessionFilesHandler extends SessionSaveHandler {
      */
     public function write($session_id, $session_data) {
         if ($fo = fopen($this->_build_file_path($session_id), 'w')) {
-            if ($this->crypt_object) {
-                $return = fwrite($fo, $this->crypt_object->encrypt($session_data));
+            if ($this->encrypt_object) {
+                $return = fwrite($fo, $this->encrypt_object->encrypt($session_data));
             } else {
                 $return = fwrite($fo, $session_data);
             }

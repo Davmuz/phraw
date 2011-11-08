@@ -230,8 +230,8 @@ A custom object method:
     # ...
     ?>
 
-Fix the trailing slash
-----------------------
+The trailing slash fixer
+------------------------
 
 This feature is very important for SEO. The search engines may think that there is a duplication of content if the same page can reached both by ``http://www.yoursite.com/page/`` and ``http://www.yoursite.com/page``, this may penalize that page.
 

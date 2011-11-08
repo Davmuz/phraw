@@ -31,9 +31,9 @@ The following example loads and starts a ``SessionFilesHandler`` class with the 
 
     .. attribute:: Phraw->session_handler
     
-        Session handler object.
+        Will have the session handler object.
     
-    .. method:: Phraw->session_start($class, [additional parameters] [...])
+    .. method:: Phraw->session_start(callback $class [, mixed $...])
     
         ``$class`` SessionSaveHandler extended class name.
         
@@ -55,13 +55,7 @@ It is possible to encrypt the session files giving an object with ``encrypt()`` 
 
 :module: extensions/sessions_files.php
 
-.. class:: SessionFilesHandler($save_path=null, $encrypt_object=null, $file_prefix='sess_')
-
-    ``$save_path`` [string] Session files directory. Use the PHP default path if null. Example: '/home/user/tmp'.
-    
-    ``$encrypt_object`` [string] Optional encryption object with encrypt() and decrypt() methods.
-    
-    ``$file_prefix`` [string] Adds a prefix to session file names in order to prevent clashes.
+.. class:: SessionFilesHandler
     
     .. attribute:: SessionFilesHandler->encrypt_object
     
@@ -74,6 +68,14 @@ It is possible to encrypt the session files giving an object with ``encrypt()`` 
     .. attribute:: SessionFilesHandler->save_path
     
         Session files directory path. The given directory must be writable by PHP.
+    
+    .. method:: SessionFilesHandler->__construct([string $save_path = null [, string $encrypt_object = null [, string $file_prefix = 'sess_' ]]])
+
+        ``$save_path`` session files directory. Use the PHP default path if null. Example: '/home/user/tmp'.
+        
+        ``$encrypt_object`` optional encryption object with encrypt() and decrypt() methods.
+        
+        ``$file_prefix`` adds a prefix to session file names in order to prevent clashes.
 
 Custom session handlers
 -----------------------

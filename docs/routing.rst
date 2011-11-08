@@ -55,21 +55,21 @@ This is an example for the URL ``http://www.example.com/?u=/foo/bar/``:
     
         The ``route()`` method will fill this attribute with the values extracted from the matched URI.
         
-    .. method:: Phraw->constructor($uri_key=null)
+    .. method:: Phraw->constructor([string $uri_key = null])
     
         Sets the ``$uri`` attribute.
         
-        ``$uri_key`` [null|string] if set will fill the ``$uri`` attribute with the GET parameter name given. Useful when mod_rewrite is not available.
+        ``$uri_key`` if set will fill the ``$uri`` attribute with the GET parameter name given. Useful when mod_rewrite is not available.
 
-    .. method:: Phraw->route($uri, $function='rexp')
+    .. method:: Phraw->route(string $uri [, mixin $function = 'rexp'])
     
         URI matching. The matching values are stored in $this->uri_values. The route mechanism can use a built-in function or a custom function passed by name.
         
         Returns ``true`` if the URI is matched.
         
-        ``$uri`` [string] is the URI path you want to resolve.
+        ``$uri`` is the URI path you want to resolve.
         
-        ``$function`` [string|array] is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
+        ``$function`` is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
         The value can also be a function name or an array for use class/objects methods (see `<http://www.php.net/manual/en/function.call-user-func-array.php>`_).
 
 Regular expressions
@@ -375,17 +375,17 @@ It can be used an object attribute for the ``$assign`` parameter:
 
 .. class:: Phraw
 
-    .. method:: Phraw->bulk_route(&$uri_list, &$assign, $function)
+    .. method:: Phraw->bulk_route(array &$uri_list, callback &$assign [, mixin $function = 'rexp'])
     
         URI matching for an array of pages. The matching values are stored in $this->uri_values. The route mechanism can use a built-in function or a custom function passed by name.
         
         Returns ``true`` if one the URIs is matched.
     
-        ``&$uri_list`` [array] key-value array of URIs. The key is the URI to match, the value will be 
+        ``&$uri_list`` key-value array of URIs. The key is the URI to match, the value will be 
         
-        ``&$assign`` [variable] variable where store the custom values of the matched URI.
+        ``&$assign`` variable where store the custom values of the matched URI.
         
-        ``$function`` [string|array] is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
+        ``$function`` is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
         The value can also be a function name or an array for use class/objects methods (see `<http://www.php.net/manual/en/function.call-user-func-array.php>`_).
 
 Bulk tree for a tree of URIs
@@ -529,15 +529,15 @@ It can be used an object attribute for the ``$assign`` parameter:
 
 .. class:: Phraw
 
-    .. method:: Phraw->tree_route(&$uri_tree, &$assign, $function)
+    .. method:: Phraw->tree_route(array &$uri_tree, callback &$assign [, mixin $function = 'rexp'])
     
         URI matching for an tree of pages. The matching values are stored in $this->uri_values. The route mechanism can use a built-in function or a custom function passed by name.
         
         Returns ``true`` if one the URIs is matched.
     
-        ``&$uri_list`` [array] key-value array of URIs. The key is the URI to match, the value will be 
+        ``&$uri_list`` key-value array of URIs. The key is the URI to match, the value will be 
         
-        ``&$assign`` [variable] variable where store the custom values of the matched URI. The values, if in an array, are merged upside.
+        ``&$assign`` variable where store the custom values of the matched URI. The values, if in an array, are merged upside.
         
-        ``$function`` [string|array] is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
+        ``$function`` is the matching method to use. The values can be: 'rexp' (default) for regular expressions, 'prexp' for regular expressions with parentheses and 'equal' for equal comparison.
         The value can also be a function name or an array for use class/objects methods (see `<http://www.php.net/manual/en/function.call-user-func-array.php>`_).

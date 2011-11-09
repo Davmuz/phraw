@@ -64,17 +64,12 @@ class Phraw {
     public $version = 'dev';
     
     /**
-     * Constructor. Get the requested URI.
+     * Constructor.
      *
-     * @param string $uri_key Optional: the name of the GET variable key that contain the URI.
+     * @param string $uri_get_key The name of the GET parameter that contains the URI.
      */
-    function __construct($uri_key=null) {
-        // Get the URI
-        if ($uri_key) {
-            $this->uri = (isset($_GET[$uri_key])) ? '/' . $_GET[$uri_key] : '/';
-        } else {
-            $this->uri = $this->get_uri();
-        }
+    function __construct($uri_get_key=null) {
+        $this->uri = $this->get_uri($uri_get_key);
     }
     
     /**
@@ -93,12 +88,16 @@ class Phraw {
     }
 
     /**
-     * Get the URI of the current request.
+     * Returns the URI of the current request.
      *
+     * @param string $get_key The name of the GET parameter that contains the URI.
      * @return string URI string.
      */
-    static function get_uri() {
-        return (string) substr(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'], 1);
+    static function get_uri($get_key=null) {
+        if ($get_key) {
+            return isset($_GET[$get_key]) ? ltrim($_GET[$get_key], '/') : '';
+        }
+        return ltrim(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'], '/');
     }
     
     /**
@@ -252,7 +251,7 @@ class Phraw {
     }
     
     /**
-     * Return the current domain and the protocol used.
+     * Return the current domain with the protocol used.
      *
      * @return string Protocol and domain name. Eg. http://www.mysite.com
      */

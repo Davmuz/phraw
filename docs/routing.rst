@@ -55,11 +55,11 @@ This is an example for the URL ``http://www.example.com/?u=/foo/bar/``:
     
         The ``route()`` method will fill this attribute with the values extracted from the matched URI.
         
-    .. method:: Phraw->constructor([string $uri_key = null])
+    .. method:: Phraw->constructor([string $get_uri_key = null])
     
         Sets the ``$uri`` attribute.
         
-        ``$uri_key`` if set will fill the ``$uri`` attribute with the GET parameter name given. Useful when mod_rewrite is not available.
+        ``$get_uri_key`` if set will fill the ``$uri`` attribute with the GET parameter name given. Useful when mod_rewrite is not available or for keep compatibility with old web sites.
 
     .. method:: Phraw->route(string $uri [, mixin $function = 'rexp'])
     

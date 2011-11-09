@@ -61,10 +61,23 @@ A simple method that prepend or append an include path.
         
         ``$append`` if true append the path, if false prepend it.
 
+Get the request URI
+-------------------
+
+This method is used by the Phraw's constructor for fetch the request URI.
+
+.. class:: Phraw
+    
+    .. method:: Phraw->get_uri([string $get_key = null])
+    
+        ``$get_key`` the name of the GET parameter that contains the URI.
+        
+        Returns the URI string.
+
 Get the current domain
 ----------------------
 
-Sometimes it is useful to get the current domain, with the http/https protocol name, in order to prepare absolute links in templates.
+Sometimes it is useful to get the current domain with the http/https protocol prefix in order to prepare absolute links in templates.
 
 .. class:: Phraw
     

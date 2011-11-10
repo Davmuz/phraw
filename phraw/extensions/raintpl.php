@@ -11,7 +11,7 @@
 require_once('raintpl/rain.tpl.class.php');
 
 /**
- * RainTPL, the default template engine for Phraw.
+ * RainTPL, template engine extension for Phraw.
  */ 
 class RaintplTemplateEngine extends RainTPL {
     /**

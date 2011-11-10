@@ -11,14 +11,14 @@
 require_once('smarty/Smarty.class.php');
 
 /**
- * Smarty, the default template engine for Phraw.
+ * Smarty, the default template engine extension for Phraw.
  */ 
 class SmartyTemplateEngine extends Smarty {
 
     /**
      * Constructor. Set the working directories. Disable some features if the debug mode is active.
      *
-     * @param bool $caching Activate the template caching.
+     * @param int $caching Activate the template caching.
      */
     function __construct($caching=1) {
         parent::__construct();

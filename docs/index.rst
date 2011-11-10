@@ -25,7 +25,6 @@ Advanced
    shortcuts
    templates
    routing
-   configuration
    views
    models
    sessions

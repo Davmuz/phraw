@@ -1,8 +1,7 @@
 Installation
 ============
 
-Phraw depend on external libraries but no one is required. It is suggested to download and install `Smarty <http://www.smarty.net/>`_ as template engine because it is fast, powerful and easy to use.
-
+Phraw depends on external libraries but no one is required. It is suggested to download and install `Smarty <http://www.smarty.net/>`_ as template engine because it is fast, powerful and easy to use.
 
 Quick installation
 ------------------
@@ -66,17 +65,20 @@ Creation of the directory structure
 
 Open the web site directory an create this suggested structure::
 
-    /lib
-    /static
-    /media
-    /resources
-        /cached
-        /compiled
-        /templates
+    lib/
+    static/
+    media/
+    resources/
+        cached/
+        compiled/
+        templates/
 
 The ``lib`` directory contains the libraries, like Phraw.
+
 The ``static`` directory contains the files that compose the HTML front end like images, CSS, JavaScript and so on.
+
 The ``media`` directory will contains the user files.
+
 The ``resources`` directory contains the files that compose the web site. Inside there are: ``cached`` for automatic cached templates, ``compiled`` for automatic compiled templates, and ``templates`` for source templates.
 
 In order to increase the security it is recommended to create and put the following ``.htaccess`` file in ``lib`` and ``resources`` directories::
@@ -96,21 +98,21 @@ Download `Phraw <http://phraw.dav-muz.net/downloads/>`_ and `Smarty <http://www.
 
 For a cleaner setup it is suggested to copy only the ``libs`` directory in the Smarty package and rename it ``smarty``. For Phraw copy only the ``phraw`` sub-directory. The result should look like::
 
-    /lib
-        /phraw
-            /extensions
+    lib/
+        phraw
+            extensions/
             phraw.php
-        /smarty
-            /plugins
-            /sysplugins
+        smarty
+            plugins/
+            sysplugins/
             debug.tpl
             Smarty.class.php
-    /static
-    /media
-    /resources
-        /cached
-        /compiled
-        /templates
+    static/
+    media/
+    resources/
+        cached/
+        compiled/
+        templates/
 
 Creation of the web site
 ^^^^^^^^^^^^^^^^^^^^^^^^

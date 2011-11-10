@@ -91,18 +91,3 @@ DEBUG (default ``false``)
 
 RESOURCES_DIR (default "resources")
     Resource directory.
-
-Usage example:
-
-.. code-block:: php
-
-    <?php
-    define('DEBUG', true); # Debug mode activated
-    require_once('lib/phraw/phraw.php');
-    
-    define('RESOURCES_DIR', '/home/user/resources'); # Custom resource directory
-    
-    $phraw = new Phraw();
-    
-    # ...
-    ?>

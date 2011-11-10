@@ -244,7 +244,7 @@ Create the routing logic for the URL ``http://example.com/hello/``:
 The routing string '^hello\/?$' is still a regular expression that matches the URL 'http://example.com/hello' or 'http://example.com/hello/'.
 The Smarty ``assign()`` method simply assign the variable name 'name' the value 'Mario'.
 
-Create a new page resources/templates/say-hello.php:
+Create a new page "resources/templates/say-hello.html":
 
 .. code-block:: smarty
 
@@ -290,6 +290,35 @@ It is also possible to obtain values directly from the URL ``http://example.com/
 Phraw automatically extracts the patterns from the regular expression and stores it into the ``requests`` property.
 
 The regular expression looks ugly? No problem, there are other optional algorithms that you can use: see the :doc:`routing guide </routing>` for more informations.
+
+Complex pages
+-------------
+
+For more complex pages it is possible to use external PHP files.
+
+Just a little example. Prepare the routing:
+
+.. code-block:: php
+
+    <?php
+    # ...
+    } else if ($phraw->route('^hello\/(?P<name>\.*)\/?$')) {
+        require_once('resources/views.php');
+        view_hello($phraw, $smarty);
+    # ...
+    ?>
+
+...then create the file "resources/views.php":
+
+.. code-block:: php
+
+    <?php
+    function view_hello(&$phraw, &$smarty) {
+        # ...
+        $smarty->assign('name', $phraw->uri_values['name']);
+        $smarty->display('say-hello.html');
+    }
+    ?>
 
 Conclusions
 -----------

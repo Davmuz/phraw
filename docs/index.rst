@@ -25,8 +25,7 @@ Advanced
    shortcuts
    templates
    routing
-   views
-   models
+   mvc
    sessions
    deployment
    scalingup

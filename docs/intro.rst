@@ -15,7 +15,7 @@ Phraw is more like a library where you can pick what you want and use powerful t
 The benefits of Phraw
 ---------------------
 
-Phraw is little, this means several things: less to learn, less code so less bugs, better performances. These are all good benefits both in little and in big web sites.
+Phraw is little, this means several things: less to learn, less code so less bugs, better performances. These are all good benefits both for little and big web sites.
 
 Phraw have also other benefits and features:
 

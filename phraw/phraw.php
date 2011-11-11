@@ -97,7 +97,10 @@ class Phraw {
         if ($get_key) {
             return isset($_GET[$get_key]) ? ltrim($_GET[$get_key], '/') : '';
         }
-        return ltrim(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'], '/');
+        if (!empty($_SERVER['PATH_INFO'])) {
+            return ltrim($_SERVER['PATH_INFO'], '/');
+        }
+        return ltrim(isset($_SERVER['REQUEST_URI']) ? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : $_SERVER['PHP_SELF'], '/');
     }
     
     /**
@@ -247,7 +250,7 @@ class Phraw {
      * @return bool True if not present or False if present.
      */
     function detect_no_trailing_slash() {
-        return $this->uri ? substr($this->uri, -1) != '/' : false;
+        return $this->uri ? substr($this->uri, -1) !== '/' : false;
     }
     
     /**
@@ -264,7 +267,7 @@ class Phraw {
      * It does a permanent redirect to the correct URL.
      */
     function fix_trailing_slash() {
-        $url = $this->get_current_domain() . '/';
+        $url = $this->get_current_domain() . ($_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] . '/' : '/');
         if (strpos($_SERVER['REQUEST_URI'], '?') == false) {
             # There are not GET variables, this is the simple case
             $url .= ltrim($this->uri . '/', '/');

@@ -1,7 +1,7 @@
 Templates
 =========
 
-Phraw is template agnostic: you can use your preffered template engine, more than one at the same time or no one.
+Phraw is template agnostic: you can use your preferred template engine, more than one at the same time or no one.
 
 Phraw comes with some extensions for major template engines. Actually are supported Smarty and RainTPL.
 

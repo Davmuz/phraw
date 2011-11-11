@@ -18,6 +18,7 @@ This is the suggested directory structure::
         cached/
         compiled/
         templates/
+    index.php
 
 The ``lib`` directory contains the libraries, like Phraw.
 

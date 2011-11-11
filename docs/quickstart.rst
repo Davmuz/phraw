@@ -14,7 +14,7 @@ The web site logic is written in a ``index.php`` file. Create it and write the f
     # Global variables: place here your global settings
     define('DEBUG', true); # Activate the debug mode
     
-    # Load Phraw with the starter shortcut
+    # Load Phraw
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();
     
@@ -84,7 +84,7 @@ This is the full code:
     # Global variables: place here your global settings
     define('DEBUG', true); # Activate the debug mode
     
-    # Load Phraw with the starter shortcut
+    # Load Phraw
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();
     
@@ -160,7 +160,7 @@ This is the full code:
     # Global variables: place here your global settings
     define('DEBUG', true); # Activate the debug mode
     
-    # Load Phraw with the starter shortcut
+    # Load Phraw
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();
     

@@ -117,4 +117,4 @@ For a cleaner setup it is suggested to copy only the ``libs`` directory in the S
 Creation of the web site
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Phraw is now ready to use. In order to print something you should create an index.php file. Continue reading the next chapter :ref:`quickstart` for more informations.
+Phraw is now ready to use. In order to print something you should create and edit the index.php file. Continue reading the next chapter :ref:`quickstart` for more informations.

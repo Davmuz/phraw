@@ -30,7 +30,7 @@ In the "index.php" file, simply create the routing rules, this is just a simple 
     <?php
     define('DEBUG', true); # Development mode
     
-    # Load Phraw with the starter shortcut
+    # Load Phraw
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();
     

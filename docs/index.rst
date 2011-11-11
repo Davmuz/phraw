@@ -7,7 +7,7 @@ First steps
 -----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    intro
    installation
@@ -19,7 +19,7 @@ Advanced
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    setup
    shortcuts
@@ -27,14 +27,13 @@ Advanced
    routing
    mvc
    sessions
-   deployment
    scalingup
 
 Additional notes
 ----------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    faq
    upgrading

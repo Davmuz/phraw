@@ -156,7 +156,7 @@ class Phraw {
             case 'rexp': # Regular expression
                 return preg_match('/' . $uri . '/', $this->uri, $this->uri_values);
             default: # Function or method call
-                return call_user_func_array($function, array(&$this->uri, &$this->uri_values));
+                return call_user_func_array($function, array(&$uri, &$this->uri, &$this->uri_values));
         }
     }
     

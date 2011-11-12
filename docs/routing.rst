@@ -168,10 +168,10 @@ It is possible to create a custom route algorithm using a simple function, an ob
 
 This feature can be used for custom algorithms or more complex behaviors like lookup pages on a database, CMSs, object-driven frameworks and so on.
 
-The custom function or method have to take two variable references: the URI to match and the array variable where store the matched values.
+The custom function or method have to take three variable references: the URI to match, the ``Phraw->uri`` attribute that contains the request URI and the ``Phraw->uri_values`` array variable where store the matched values.
 The return value have to be a boolean: ``true`` if the URI is matched or ``false`` if not.
 
-The values stored in the ``$uri_values`` array have to be by name, if named, an also by integer (the first value have the index 1, the second 2 and so on). The 0 value have to be the text that matched the full pattern.
+The values stored in the ``$phraw_uri_values`` array have to be by name, if named, an also by integer (the first value have the index 1, the second 2 and so on). The 0 value have to be the text that matched the full pattern.
 
 A custom function:
 
@@ -180,7 +180,7 @@ A custom function:
     <?php
     # ...
     
-    function myroute(&$uri, &$uri_values) {
+    function myroute(&$uri, &$phraw_uri, &$phraw_uri_values) {
         # ...
     }
     
@@ -198,7 +198,7 @@ A custom class method:
     # ...
     
     class Routing {
-        function myroute(&$uri, &$uri_values) {
+        function myroute(&$uri, &$phraw_uri, &$phraw_uri_values) {
             # ...
         }
     }
@@ -217,7 +217,7 @@ A custom object method:
     # ...
     
     class Routing {
-        function myroute(&$uri, &$uri_values) {
+        function myroute(&$uri, &$phraw_uri, &$phraw_uri_values) {
             # ...
         }
     }

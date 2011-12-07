@@ -25,7 +25,7 @@ The main function is the ``route()`` method. It takes an URI string, verify if m
 
 The leading slash of the request URI is always removed because every URL has that.
 
-Phraw supports three matching algorithms: reqular expressions (default), regular expressions on parentheses and equals matching.
+Phraw supports three matching algorithms: regular expressions (default), regular expressions on parentheses and equals matching.
 
 The Phraw's $uri_values attribute will contains the values extracted from the matched URI.
 

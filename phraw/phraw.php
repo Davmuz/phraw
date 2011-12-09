@@ -191,12 +191,10 @@ class Phraw {
     function tree_route(&$uri_tree, &$assign, $function='rexp', $_prefix='') {
         foreach ($uri_tree as $partial_uri => $value) {
             if ($value[0]) { # It's a branch
-                $result = $this->tree_route($value[0], $assign, $function, $partial_uri);
-                if ($result) {
-                    if (is_array($assign)) {
-                        $assign = array_merge($assign, array_slice($value, 1));
-                    }
-                    return $result;
+                $current_values = array_slice($value, 1);
+                if ($this->tree_route($value[0], $current_values, $function, $partial_uri)) {
+                    $assign = is_array($assign) ? array_merge($assign, $current_values) : $current_values;
+                    return true;
                 }
             } else { # It's a leaf
                 if ($this->route($_prefix . $partial_uri, $function)) {

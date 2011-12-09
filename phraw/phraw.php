@@ -171,7 +171,7 @@ class Phraw {
     function bulk_route(&$uri_list, &$assign, $function='rexp') {
         foreach ($uri_list as $uri => $value) {
             if ($this->route($uri, $function)) {
-                $assign = $value;
+                $assign = is_array($assign) ? array_merge($assign, $value) : $value;
                 return true;
             }
         }

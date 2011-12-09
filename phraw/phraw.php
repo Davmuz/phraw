@@ -194,7 +194,7 @@ class Phraw {
                 $result = $this->tree_route($value[0], $assign, $function, $partial_uri);
                 if ($result) {
                     if (is_array($assign)) {
-                        $assign = array_merge(array_slice($value, 1), $assign);
+                        $assign = array_merge($assign, array_slice($value, 1));
                     }
                     return $result;
                 }

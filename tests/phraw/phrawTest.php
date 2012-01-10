@@ -64,5 +64,51 @@ class PhrawTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($phraw->route('foo/bar', 'custom_route'));
         $this->assertEquals('bar', $phraw->uri_values['name']);
     }
+    
+    public function testBulk_route() {
+        $_SERVER['REQUEST_URI'] = 'contacts/';
+        $phraw = new Phraw();
+        
+        # Void
+        $pages = array();
+        $this->assertFalse($phraw->bulk_route($pages, $page_found, 'equal'));
+        $pages = array(
+            '' => 'index.html',
+            'about/' => 'about.html',
+            'documentation/' => 'documentation/index.html'
+        );
+        $this->assertFalse($phraw->bulk_route($pages, $page_found, 'equal'));
+        
+        # Simple match
+        $pages = array(
+            '' => 'index.html',
+            'about/' => 'about.html',
+            'contacts/' => 'contacts.html',
+            'documentation/' => 'documentation/index.html'
+        );
+        $this->assertTrue($phraw->bulk_route($pages, $page_found, 'equal'));
+        $this->assertEquals('contacts.html', $page_found);
+        
+        # Match with an extra parameter
+        $pages = array(
+            '' => array('index.html', 'one'),
+            'about/' => array('about.html', 'two'),
+            'contacts/' => array('contacts.html', 'three'),
+            'documentation/' => array('documentation/index.html', 'four')
+        );
+        $this->assertTrue($phraw->bulk_route($pages, $page_found, 'equal'));
+        $this->assertEquals('three', $page_found[1]);
+        
+        # Match with extra parameters and one with a key
+        $pages = array(
+            '' => array('index.html', 'one'),
+            'about/' => array('about.html', 'two', 'number' => 2),
+            'contacts/' => array('contacts.html', 'three', 'number' => 3),
+            'documentation/' => array('documentation/index.html', 'four')
+        );
+        $this->assertTrue($phraw->bulk_route($pages, $page_found, 'equal'));
+        $this->assertEquals('three', $page_found[1]);
+        $this->assertEquals(3, $page_found['number']);
+    }
 }
 ?>

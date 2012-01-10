@@ -204,5 +204,23 @@ class PhrawTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(3, $values['number']);
         unset($values);
     }
+
+    public function testDetect_no_trailing_slash() {
+        $_SERVER['REQUEST_URI'] = '';
+        $phraw = new Phraw();
+        $this->assertFalse($phraw->detect_no_trailing_slash());
+        
+        $_SERVER['REQUEST_URI'] = '/';
+        $phraw = new Phraw();
+        $this->assertFalse($phraw->detect_no_trailing_slash());
+        
+        $_SERVER['REQUEST_URI'] = 'foo/';
+        $phraw = new Phraw();
+        $this->assertFalse($phraw->detect_no_trailing_slash());
+        
+        $_SERVER['REQUEST_URI'] = 'foo/bar';
+        $phraw = new Phraw();
+        $this->assertTrue($phraw->detect_no_trailing_slash());
+    }
 }
 ?>

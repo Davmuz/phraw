@@ -113,7 +113,7 @@ class Phraw {
      * - prexp: uses regular expressions only in parentheses.
      * - equal: matches equal strings.
      *
-     * Using a custom function: create a new function or objcect method with the parameters &$uri and &$uri_values. See the documentation for more informations.
+     * Using a custom function: create a new function or objcect method with the parameters &$uri, &$request_uri and &$uri_values. See the documentation for more informations.
      *
      * @param string $uri URI to match.
      * @param mixed $function Method name (string) used to match the URI or function name (string) or method name (array) for a custom function call.
@@ -152,9 +152,9 @@ class Phraw {
                     $regx_uri = substr($regx_uri, 0, -2) . '$';
                 }
                 
-                return preg_match('/' . $regx_uri . '/', $this->uri, $this->uri_values);
+                return (bool) preg_match('/' . $regx_uri . '/', $this->uri, $this->uri_values);
             case 'rexp': # Regular expression
-                return preg_match('/' . $uri . '/', $this->uri, $this->uri_values);
+                return (bool) preg_match('/' . $uri . '/', $this->uri, $this->uri_values);
             default: # Function or method call
                 return call_user_func_array($function, array(&$uri, &$this->uri, &$this->uri_values));
         }

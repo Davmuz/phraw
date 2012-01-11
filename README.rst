@@ -10,8 +10,6 @@ Details and example applications are a vailable on `the Phraw official website <
 Just a small example
 --------------------
 
-.. code-block:: php
-
     <?php
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();

@@ -28,6 +28,7 @@ Advanced
    mvc
    sessions
    scalingup
+   tests
 
 Additional notes
 ----------------

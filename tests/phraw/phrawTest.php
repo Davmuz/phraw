@@ -1,6 +1,14 @@
 <?
 require_once('../phraw/phraw.php');
 
+class TestValueException extends Exception {}
+
+class PhrawMockFix_trailing_slash extends Phraw {
+    static function redirect($url=null, $type=301) {
+        throw new TestValueException($url);
+    }
+}
+
 class PhrawTest extends PHPUnit_Framework_TestCase {
     public function testGet_uri() {
         $phraw = new Phraw();
@@ -221,6 +229,31 @@ class PhrawTest extends PHPUnit_Framework_TestCase {
         $_SERVER['REQUEST_URI'] = 'foo/bar';
         $phraw = new Phraw();
         $this->assertTrue($phraw->detect_no_trailing_slash());
+    }
+
+    public function testFix_trailing_slash() {
+        # Classic situation
+        $_SERVER['REQUEST_URI'] = 'foo/bar';
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = '80';
+        $phraw_mock = new PhrawMockFix_trailing_slash();
+        try {
+            $phraw_mock->fix_trailing_slash();
+        } catch (TestValueException $e) {
+            $this->assertEquals('http://localhost/foo/bar/', $e->getMessage());
+        }
+        
+        # Mixed situation
+        $_SERVER['REQUEST_URI'] = 'foo/bar';
+        $_SERVER['SERVER_NAME'] = 'www.localhost';
+        $_SERVER['SERVER_PORT'] = '8080';
+        $_SERVER['HTTPS'] = 'on';
+        $phraw_mock = new PhrawMockFix_trailing_slash();
+        try {
+            $phraw_mock->fix_trailing_slash();
+        } catch (TestValueException $e) {
+            $this->assertEquals('https://www.localhost:8080/foo/bar/', $e->getMessage());
+        }
     }
 }
 ?>

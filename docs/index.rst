@@ -38,6 +38,7 @@ Additional notes
 
    faq
    upgrading
+   contribute
    changelog
    license
 

@@ -13,8 +13,17 @@ Just a small example
     <?php
     require_once('lib/phraw/phraw.php');
     $phraw = new Phraw();
-    
     if ($phraw->route('')) {
         echo 'Hello world!';
     }
     ?>
+
+Understand the GIT workflow
+---------------------------
+
+Branches:
+
+- Master: stable releases. Here are only the official stable releases.
+- Develop: main development branch. Use this if you want to test the new features or for contribute.
+
+Release candidate versions are tagged ``release-vX`` where ``X`` will be the final version. Try release versions for bleeding edge code or to help to debug the code before the official release.

@@ -4,7 +4,7 @@
  *
  * Framework instance.
  * 
- * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
+ * @copyright Copyright (C) 2010-2012 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  * @version dev
  * @package phraw

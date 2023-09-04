@@ -12,9 +12,6 @@ Any help is wellcome:
 - Fix a bug or suggest a patch on the `issue tracker <https://github.com/Davmuz/phraw/issues>`_.
 - Write an extension (for another template engine, an ORM ...).
 
-Send your help via `email <mailto:info@phraw.dav-muz.net>`_ on the `forum <http://phraw.dav-muz.net/forum/>`_ 
-
-
 Understand the GIT workflow
 ---------------------------
 

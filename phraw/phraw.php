@@ -3,8 +3,8 @@
  * Phraw - PHP mini-framework
  *
  * Framework instance.
- * 
- * @copyright Copyright (C) 2010-2012 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
+ *
+ * @copyright Copyright (C) 2010-2012 Davide Muzzarelli <davide@muzzarelli.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  * @version dev
  * @package phraw
@@ -33,7 +33,7 @@ if (!defined('RESOURCES_DIR')) {
  * Main class.
  *
  * @package Phraw
- */ 
+ */
 class Phraw {
     /**
      * Contains the requested URI.
@@ -41,14 +41,14 @@ class Phraw {
      * @var string
      */
     public $uri;
-    
+
     /**
      * Contains the URI values extracted from the url.
      *
      * @var array
      */
     public $uri_values;
-    
+
     /**
      * Session handler object.
      *
@@ -62,7 +62,7 @@ class Phraw {
       * @ver string
       */
     public $version = 'dev';
-    
+
     /**
      * Constructor.
      *
@@ -71,7 +71,7 @@ class Phraw {
     function __construct($uri_get_key=null) {
         $this->uri = $this->get_uri($uri_get_key);
     }
-    
+
     /**
      * Add the path to the include path.
      *
@@ -102,7 +102,7 @@ class Phraw {
         }
         return ltrim(isset($_SERVER['REQUEST_URI']) ? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : $_SERVER['PHP_SELF'], '/');
     }
-    
+
     /**
      * URI matching.
      * The matching values are stored in $this->uri_values.
@@ -142,7 +142,7 @@ class Phraw {
                     }
                     $regx_uri .= $chunk;
                 }
-                
+
                 # Replace rexp start and end
                 $uri_len = strlen($uri);
                 if ($uri_len && $uri[0] === '^') {
@@ -151,7 +151,7 @@ class Phraw {
                 if ($uri_len && $uri[$uri_len - 1] === '$') {
                     $regx_uri = substr($regx_uri, 0, -2) . '$';
                 }
-                
+
                 return (bool) preg_match('/' . $regx_uri . '/', $this->uri, $this->uri_values);
             case 'rexp': # Regular expression
                 return (bool) preg_match('/' . $uri . '/', $this->uri, $this->uri_values);
@@ -159,7 +159,7 @@ class Phraw {
                 return call_user_func_array($function, array(&$uri, &$this->uri, &$this->uri_values));
         }
     }
-    
+
     /**
      * URI matching for an array of pages.
      *
@@ -177,7 +177,7 @@ class Phraw {
         }
         return false;
     }
-    
+
     /**
      * URI matching for an tree of pages.
      * URI is build following the tree. The values, if in an array, are merged upside.
@@ -205,7 +205,7 @@ class Phraw {
         }
         return false;
     }
-    
+
     /**
      * HTTP redirection.
      * It is possibile to display content in the redirect page.
@@ -229,7 +229,7 @@ class Phraw {
             header('Location: ' . $url);
         }
     }
-    
+
     /**
      * Start a session using the given SessionSaveHandler base class.
      *
@@ -241,7 +241,7 @@ class Phraw {
         $this->session_handler = $reflection->newInstanceArgs(array_slice(func_get_args(), 1));
         session_start();
     }
-    
+
     /**
      * Detect the absence of the trailing slash.
      *
@@ -250,7 +250,7 @@ class Phraw {
     function detect_no_trailing_slash() {
         return $this->uri ? substr($this->uri, -1) !== '/' : false;
     }
-    
+
     /**
      * Return the current domain with the protocol used.
      *
@@ -259,7 +259,7 @@ class Phraw {
     static function get_current_domain() {
         return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
     }
-    
+
     /**
      * Fix the URI adding the trailing slash.
      * It does a permanent redirect to the correct URL.
@@ -275,7 +275,7 @@ class Phraw {
         }
         $this->redirect($url);
     }
-    
+
     /**
      * Set a HTTP client error 4xx header.
      *

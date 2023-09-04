@@ -5,15 +5,15 @@
  * This class is more secure than the default session handling behavior.
  * It is possible to encrypt the session files giving an encrypt object.
  *
- * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
+ * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <davide@muzzarelli.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  */
- 
+
 require_once('phraw/extensions/sessions.php');
 
 /**
  * Session handler with files.
- */ 
+ */
 class SessionFilesHandler extends SessionSaveHandler {
     /**
      * Session files directory path.
@@ -22,14 +22,14 @@ class SessionFilesHandler extends SessionSaveHandler {
      * @var string
      */
     public $save_path;
-    
+
     /**
      * Session file name prefix.
      *
      * @var string
      */
     public $file_prefix;
-    
+
     /**
      * Encription object.
      * It must have encrypt() and decrypt() methods that takes and returns a string.
@@ -52,7 +52,7 @@ class SessionFilesHandler extends SessionSaveHandler {
         } # Else, it will be set with the open() method
         $this->encrypt_object = $encrypt_object;
     }
-    
+
     /**
      * Open a session.
      *
@@ -64,13 +64,13 @@ class SessionFilesHandler extends SessionSaveHandler {
             $this->save_path = $save_path;
         }
     }
-    
+
     /**
      * Is executed when the session operation is done.
      */
     public function close() {
     }
-    
+
     /**
      * Read session data from a file.
      *
@@ -84,7 +84,7 @@ class SessionFilesHandler extends SessionSaveHandler {
                 return (string) @file_get_contents($this->_build_file_path($session_id));
             }
     }
-    
+
     /**
      * Write the session data into a file.
      *
@@ -104,7 +104,7 @@ class SessionFilesHandler extends SessionSaveHandler {
             return false;
         }
     }
-    
+
     /**
      * Destroy a session file.
      *
@@ -113,7 +113,7 @@ class SessionFilesHandler extends SessionSaveHandler {
     public function destroy($session_id) {
         return(@unlink($this->_build_file_path($session_id)));
     }
-    
+
     /**
      * Remove the old session files.
      *
@@ -126,7 +126,7 @@ class SessionFilesHandler extends SessionSaveHandler {
             }
         }
     }
-    
+
     /**
      * Build the session file path.
      *

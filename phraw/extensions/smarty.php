@@ -4,15 +4,15 @@
  *
  * The Smarty template engine can be found here: http://www.smarty.net/
  *
- * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <d.muzzarelli@dav-muz.net>. All rights reserved.
+ * @copyright Copyright (C) 2010-2011 Davide Muzzarelli <davide@muzzarelli.net>. All rights reserved.
  * @license BSD, see LICENSE.txt for more details.
  */
- 
+
 require_once('smarty/Smarty.class.php');
 
 /**
  * Smarty, the default template engine extension for Phraw.
- */ 
+ */
 class SmartyTemplateEngine extends Smarty {
 
     /**
@@ -26,16 +26,16 @@ class SmartyTemplateEngine extends Smarty {
         $this->compile_dir = RESOURCES_DIR . '/compiled/';
         $this->cache_dir = RESOURCES_DIR . '/cached/';
         $this->caching = $caching;
-        
+
         if (DEBUG) {
             $this->force_compile = true;
             $this->caching = 0;
         }
     }
-    
+
     /**
      * Display a client error page.
-     * 
+     *
      * @param int $type Type of message. Default: 404 Page Not Found.
      */
     function display_error($type=404) {

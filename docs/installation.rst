@@ -6,7 +6,7 @@ Phraw depends on external libraries but no one is required. It is suggested to d
 Quick installation
 ------------------
 
-The faster way to install Phraw is to `download <http://phraw.dav-muz.net/downloads/>`_ a pre-packaged distribution. You should start with the vanilla distribution that contains Phraw and Smarty.
+The faster way to install Phraw is to `download <https://phraw.muzzarelli.net/downloads/>`_ a pre-packaged distribution. You should start with the vanilla distribution that contains Phraw and Smarty.
 
 Follow the instructions:
 
@@ -33,7 +33,7 @@ Edit your site configuration file and add the following lines to your "location 
 
     location / {
         # ...
-        
+
         if (!-f $request_filename) {
             rewrite ^.*$ /index.php last;
             break;
@@ -42,7 +42,7 @@ Edit your site configuration file and add the following lines to your "location 
             rewrite ^.*$ /index.php last;
             break;
         }
-        
+
         # ...
     }
 
@@ -94,7 +94,7 @@ Installation of the libraries
 
 Smarty is not necessary, but it is used in this documentation so it is suggested to install it.
 
-Download `Phraw <http://phraw.dav-muz.net/downloads/>`_ and `Smarty <http://www.smarty.net/>`_. Extract the two packages in the ``lib`` directory.
+Download `Phraw <https://phraw.muzzarelli.net/downloads/>`_ and `Smarty <http://www.smarty.net/>`_. Extract the two packages in the ``lib`` directory.
 
 For a cleaner setup it is suggested to copy only the ``libs`` directory in the Smarty package and rename it ``smarty``. For Phraw copy only the ``phraw`` sub-directory. The result should look like::
 
